@@ -1,3 +1,32 @@
+function preparePlaceholder(){
+	if(!document.createElement) return false;
+	if(!document.createTextNode) return false;
+	if(!document.getElementById) return false;
+	var place_holder = document.createElement("img");
+	place_holder.setAttribute("id","Space_holder");
+	place_holder.setAttribute("src","images/space.jpg");
+	place_holder.setAttribute("alt","My image Gallery");
+	var description = document.createElement("p");
+	description.setAttribute("id","discription");
+	var desctext = document.createTextNode("There is nothing.")
+	description.appendChild(desctext);
+	//document.body.appendChild(place_holder);
+	//document.body.appendChild(description);
+	var gallary = document.getElementById("ShowPic");
+	if(!gallary) return false;
+	insertAfter(place_holder,gallary);
+	insertAfter(description,place_holder);
+}
+
+
+function insertAfter(newElement,targetElement){        //write the function of insertAfter();
+	var parent = targetElement.parentNode;
+	if(parent.lastChild == targetElement){
+		parent.appendChild(newElement);
+	}else{
+		parent.insertBefore(newElement,targetElement.nextSibling);
+	}
+}
 
 function ShowPicture(whichpic){
 	var source = whichpic.getAttribute("href");
@@ -19,12 +48,7 @@ function ShowPicture(whichpic){
 	//discript.setAttribute("") 
 	return true;
 }
-function CountChilds(){
-	var body_element = document.getElementsByTagName("body")[0];
-	var count_child = body_element.childNodes.length;
-	alert(count_child);	
-}
-//window.onload = CountChilds;
+
 function preparelinks(){
 	/*var links = document.getElementsByTagName("a")
 	for (var i=0; i<links.length; i++){
@@ -62,4 +86,9 @@ function addLoadEvent(func){
 		}
 	}
 }
+addLoadEvent(preparePlaceholder);
 addLoadEvent(preparelinks);
+
+
+
+
